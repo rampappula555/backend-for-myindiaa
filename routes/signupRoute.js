@@ -4,6 +4,10 @@ const app = require("express");
 const router = app.Router();
 router.post("/signup", async (request, response) => {
   const { username, email, password } = request.body;
+  if (!username || !password || !email) {
+    response.status(401).json({ message: "provide valid credentials" });
+    return;
+  }
   try {
     const alreadyExists = await User.findOne({ email });
     if (alreadyExists) {

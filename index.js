@@ -7,8 +7,8 @@ const app = express();
 app.use(express.json());
 dotenv.config();
 const port = process.env.PORT || 5500;
-app.use("/user", router);
-app.use("/users", router1);
+app.use(router);
+app.use(router1);
 mongoose
   .connect(process.env.MONGOOSE_URI)
   .then(() => {
