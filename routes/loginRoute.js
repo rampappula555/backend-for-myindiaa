@@ -24,7 +24,7 @@ router.post("/login", async (request, response) => {
           expiresIn: "24h",
         }
       );
-      response.status(200).json({ jwt_token });
+      response.status(200).json({ jwt_token, id: userExists._id });
     }
   } catch (error) {
     console.log(error);

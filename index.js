@@ -4,10 +4,9 @@ const dotenv = require("dotenv");
 const cors = require("cors");
 const app = express();
 app.use(express.json());
-// app.use(cors());
 app.use(
   cors({
-    origin: "http://localhost:3000", // or your specific frontend URL
+    origin: "http://localhost:3000",
     methods: ["GET", "POST", "PUT", "DELETE"],
     allowedHeaders: ["Content-Type", "Authorization"],
   })
@@ -17,6 +16,7 @@ dotenv.config();
 const port = process.env.PORT || 5500;
 app.use(require("./routes/signupRoute"));
 app.use(require("./routes/loginRoute"));
+app.use(require("./routes/profileRoute"));
 mongoose
   .connect(process.env.MONGOOSE_URI)
   .then(() => {
