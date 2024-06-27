@@ -1,5 +1,6 @@
 const { User } = require("../models/User");
 const app = require("express");
+const bcrypt = require("bcrypt");
 const router = app.Router();
 router.post("/signup", async (request, response) => {
   const userDetails = request.body;
@@ -14,9 +15,10 @@ router.post("/signup", async (request, response) => {
       response.status(403).json({ message: "user already exist" });
       return;
     }
-    const user = new User({ username, email, password });
+    const encryptPassword = bcrypt.hashSync(password, 10);
+    const user = new User({ username, email, encryptPassword });
     await user.save();
-    response.send(201).json({ message: "account created successfully" });
+    response.status(201).json({ message: "Account created successfully" });
     // response.navigate("/login");
   } catch (error) {
     response.sendStatus(500);
