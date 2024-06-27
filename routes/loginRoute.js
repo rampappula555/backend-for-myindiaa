@@ -1,6 +1,6 @@
 const app = require("express");
 const jwt = require("jsonwebtoken");
-const bcrypt=require('bcrypt')
+const bcrypt = require("bcrypt");
 const { User } = require("../models/User");
 const router = app.Router();
 router.post("/login", async (request, response) => {
@@ -11,15 +11,19 @@ router.post("/login", async (request, response) => {
       response.status(404).json({ message: "user not found" });
       return;
     }
-    const decryptPassword=bcrypt.compareSync(password,userExists.password)
+    const decryptPassword = bcrypt.compareSync(password, userExists.password);
     if (!decryptPassword) {
       response.status(401).json({ message: "password not match" });
       return;
     }
     if (decryptPassword) {
-      const jwt_token = jwt.sign({ username,userExists._id }, process.env.SECRET_KEY, {
-        expiresIn: "24h",
-      });
+      const jwt_token = jwt.sign(
+        { username, userId: userExists._id },
+        process.env.SECRET_KEY,
+        {
+          expiresIn: "24h",
+        }
+      );
       response.status(200).json({ jwt_token });
     }
   } catch (error) {
