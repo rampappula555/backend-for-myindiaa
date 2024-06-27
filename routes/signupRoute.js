@@ -1,4 +1,4 @@
-const User = require("../models/User");
+const { User } = require("../models/User");
 const app = require("express");
 const router = app.Router();
 router.post("/signup", async (request, response) => {
