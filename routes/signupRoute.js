@@ -15,11 +15,10 @@ router.post("/signup", async (request, response) => {
       response.status(403).json({ message: "user already exist" });
       return;
     }
-    const encryptPassword = bcrypt.hashSync(password, 10);
-    const user = new User({ username, email, encryptPassword });
+    const hashedPwd = await bcrypt.hash(password, 10);
+    const user = new User({ username, email, password: hashedPwd });
     await user.save();
     response.status(201).json({ message: "Account created successfully" });
-    // response.navigate("/login");
   } catch (error) {
     response.sendStatus(500);
   }
