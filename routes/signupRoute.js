@@ -1,5 +1,4 @@
-const { User } = require("../models/User");
-
+const User = require("../models/User");
 const app = require("express");
 const router = app.Router();
 router.post("/signup", async (request, response) => {
@@ -22,4 +21,4 @@ router.post("/signup", async (request, response) => {
     response.sendStatus(500);
   }
 });
-module.exports.router = router;
+module.exports = router;

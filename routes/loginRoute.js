@@ -25,4 +25,4 @@ router.post("/login", async (request, response) => {
     response.sendStatus(500);
   }
 });
-module.exports.router = router;
+module.exports = router;

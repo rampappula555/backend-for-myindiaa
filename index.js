@@ -1,20 +1,10 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const dotenv = require("dotenv");
-// const jwt = require("jsonwebtoken");
 const app = express();
 app.use(express.json());
 dotenv.config();
-// const aunthenticateMiddleWare=(request,response,next)=>{
-//   const jwtToken=request?.headers['authentication']?.split(' ')[1]
-//   if(!jwtToken){
-//     response.status(401).json({message:'Un-authorized'})
-//     return
-//   }
-//   const verifiedUser=jwt.verify(jwtToken,process.env.SECRET_KEY,()=>{
 
-//   })
-// }
 const port = process.env.PORT || 5500;
 app.use(require("./routes/signupRoute"));
 app.use(require("./routes/loginRoute"));
